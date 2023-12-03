@@ -1,0 +1,7 @@
+Found AdamsBashfort
+Found AdamsBashfortMoulton
+Found RungeKutta
+Found ToCSV
+Found CommandBar
+Use RungeKuttaas a solver
+Use CommandBaras a visualisator

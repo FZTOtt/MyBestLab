@@ -9,7 +9,7 @@ class PluginSolver : public BasePlugin {
 
 protected:
     // Массив лямбда-функций для уравнений
-    std::vector<std::function<double(double, std::vector<double>)>> equations;
+    std::vector<std::function<double(double, const std::vector<double>&)>> equations;
     std::vector<double> init;
     double startTime;
     double endTime;
@@ -18,7 +18,7 @@ protected:
 public:
     std::vector<std::vector<double>> solution;
     
-    PluginSolver();
+    PluginSolver() {};
 
     // Переопределение метода получения типа плагина
     virtual std::string getPluginType() override{
@@ -29,7 +29,7 @@ public:
     //virtual std::string getPluginName() const override;
 
     // Метод для установки уравнения с использованием лямбда-функций
-    void SetEquation(const std::vector<std::function<double(double, std::vector<double>)>>& _equations){
+    void SetEquation(const std::vector<std::function<double(double, const std::vector<double>&)>>& _equations){
         equations = _equations;
     };
 

@@ -6,7 +6,7 @@
 
 class VisualisatorPlugin : public BasePlugin {
 public:
-    VisualisatorPlugin();
+    VisualisatorPlugin() {};
 
     // Переопределение метода получения типа плагина
     virtual std::string getPluginType() override{

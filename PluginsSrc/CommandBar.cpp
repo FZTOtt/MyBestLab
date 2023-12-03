@@ -24,7 +24,7 @@ public:
             for (int j = 0; j < data[0].size() - 1; ++j){
                 std::cout << data[i][j] << ", ";
             }
-            std::cout << data[i][-1] << std::endl;
+            std::cout << data[i][data[0].size() - 1] << std::endl;
             startTime+=stepSize;
         }
     }

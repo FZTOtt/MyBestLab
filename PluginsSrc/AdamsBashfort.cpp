@@ -30,40 +30,45 @@ public:
 
 private:
     void RungeKuttaStep(double t, double stepSize) {
-
         std::vector<double> k1, k2, k3, k4;
-
         for (int i = 0; i < equations.size(); i++){
             k1.push_back(equations[i](t, init));
         }
 
+        std::vector<double> args1;
         for (int i = 0; i < equations.size(); i++){
-            std::vector<double> args;
-            for (int i = 0; i < equations.size(); i++){
-                args.push_back(init[i] + k1[i] * stepSize / 2);
-            }
-            k2.push_back(equations[i](t + stepSize / 2, init));
+            args1.push_back(init[i] + k1[i] * stepSize / 2);
+        }
+
+        for (int i = 0; i < equations.size(); i++){
+            
+            k2.push_back(equations[i](t + stepSize / 2, args1));
+        }
+
+        std::vector<double> args2;
+        for (int i = 0; i < equations.size(); i++){
+            args2.push_back(init[i] + k2[i] * stepSize / 2);
         }
         
         for (int i = 0; i < equations.size(); i++){
-            std::vector<double> args;
-            for (int i = 0; i < equations.size(); i++){
-                args.push_back(init[i] + k2[i] * stepSize / 2);
-            }
-            k3.push_back(equations[i](t + stepSize / 2, init));
+            
+            k3.push_back(equations[i](t + stepSize / 2, args2));
+        }
+
+        std::vector<double> args3;
+        for (int i = 0; i < equations.size(); i++){
+            args3.push_back(init[i] + k3[i] * stepSize);
         }
 
         for (int i = 0; i < equations.size(); i++){
-            std::vector<double> args;
-            for (int i = 0; i < equations.size(); i++){
-                args.push_back(init[i] + k3[i] * stepSize);
-            }
-            k4.push_back(equations[i](t + stepSize, init));
+            
+            k4.push_back(equations[i](t + stepSize, args3));
         }
 
         for (int i = 0; i < equations.size(); i++){
-            init[i] += (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]) / 6 * stepSize;
+            init[i] += (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]) / 6.0 * stepSize;
         }
+        solution.push_back(init);
     }
 };
 // Функция регистрации плагина в системе
